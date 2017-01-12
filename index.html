@@ -1,0 +1,231 @@
+
+
+
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8">
+    <title>Issues GitHub</title>
+
+    <style type="text/css">
+
+    *{
+      font-family: Arial, sans-serif;
+    }
+
+
+
+      table, td, th {
+        border: 1px solid black;
+        text-align: center;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 50%;
+        margin-bottom: 2%;
+    }
+
+    th {
+        height: 30px;
+    }
+
+    td{
+      height: 25px;
+    }
+
+    </style>
+
+   
+  </head>
+  <body>
+  <script src="jquery.js"></script>
+   <h2 class="text-center">Issues GitHub</h2>
+   <div id="content">
+
+   </div>
+
+   <button id="btnList">Lista Issues</button>
+   <button id="btnSearch">Buscar Issue</button>
+   <button id="btnCreate">Cria Issues</button>
+
+
+
+
+      <script>
+
+      document.querySelector("#btnList").addEventListener("click", listaIssues);
+      document.querySelector("#btnSearch").addEventListener("click", abreInput);
+      document.querySelector("#btnCreate").addEventListener("click", createIssue);
+      
+
+
+
+
+        //Faz a request da listagem das issues
+
+        function listaIssues(){
+        var ajax = new XMLHttpRequest();
+        var issueList = "";
+        
+        ajax.onreadystatechange = function() 
+        {
+          if (this.readyState == 4 && this.status == 200) 
+          {
+            issueList = JSON.parse(this.responseText);
+            populaDadosIssues(issueList);
+        
+          }
+        }
+        
+        ajax.open("GET", "https://api.github.com/repos/christopherQueiroz/estudo_api_maps/issues", true);
+        
+        ajax.send();
+      }
+
+
+
+        function listaUmaIssue()
+        {
+        debugger;
+        var ajax = new XMLHttpRequest();
+        var issueList = "";
+        var number = document.getElementById("inputIssue").value;
+
+        ajax.onreadystatechange = function() 
+        {
+          if (this.readyState == 4 && this.status == 200) 
+          {
+            issueList = JSON.parse(this.responseText);
+            populaDadosUmaIssue(issueList);
+        
+          }
+        }
+        
+        ajax.open("GET", "https://api.github.com/repos/christopherQueiroz/estudo_api_maps/issues/"+number, true);
+        
+        ajax.send();
+      }
+
+
+
+        function createIssue(){
+
+        var tituloIssue = "Novo Teste";
+        var msgIssue = "Esse é mais um teste";  
+
+      /*  var ajax = new XMLHttpRequest();
+        var newIssue = {"title" : "'+ tituloIssue +'" , "body" : "'+ msgIssue +'"};
+*/
+
+ /*       $.post("https://api.github.com/repos/christopherQueiroz/estudo_api_maps/issues", {
+                "title" :  tituloIssue ,
+                "body" :  msgIssue,
+                "assignee" : "someone",
+                "assignees" : [{
+                                "login" : "thisUser",
+                                "id" : "1",
+                               }],
+                "milestone" : 1,
+                "state" : "open",
+                "labels" : ["teste"]
+               },
+
+                function(data)
+                {
+                  alert("foi");
+                });*/
+
+
+      $.ajax({
+        type: "POST",
+        data: {
+               "title" :  tituloIssue ,
+                "body" :  msgIssue,
+                //"assignees" : [],
+                "milestone" : 1,
+                //"labels" : []
+              },
+        url : "https://api.github.com/repos/christopherQueiroz/estudo_api_maps/issues",
+        success: function(data)
+        {
+          listaIssues();
+        }
+
+      });
+
+      /*  ajax.onreadystatechange = function() 
+        {
+          if (this.readyState == 4 && this.status == 200) 
+          {
+            issueList = JSON.parse(this.responseText);
+            populaDadosIssues(issueList);
+        
+          }
+        }
+        
+        ajax.open("POST", "https://api.github.com/repos/christopherQueiroz/estudo_api_maps/issues", true);
+        
+        ajax.send(newIssue);*/
+      }
+
+
+
+
+     
+      //Popula os dados listados no grid
+      function populaDadosIssues(issues)
+      {
+          var divContent = '<table>';
+
+          divContent += '<tr><th>Número</th><th>Id</th><th>Título</th><th>Mensagem</th></tr>';
+
+          for(var cont = 0; cont < issues.length; cont++)
+          {
+            divContent += '<tr><td>'+issues[cont].number+'</td><td>'+issues[cont].id+'</td><td>'+issues[cont].title+'</td><td>'+issues[cont].body+'</td></tr>'
+          }
+
+         divContent += '</table>'
+
+         document.getElementById("content").innerHTML = divContent;
+
+      }
+
+      
+      function populaDadosUmaIssue(issues)
+      {
+          var divContent = '<table>';
+
+          divContent += '<tr><th>Número</th><th>Id</th><th>Título</th><th>Mensagem</th></tr>';  
+          divContent += '<tr><td>'+issues.number+'</td><td>'+issues.id+'</td><td>'+issues.title+'</td><td>'+issues.body+'</td></tr>'
+          divContent += '</table>'
+
+         document.getElementById("content").innerHTML = divContent;
+
+      }
+
+
+     function abreInput()
+     {
+
+      var divContent = '<p>Digite o numero da issue: <input type = "text" id="inputIssue">';
+      divContent += '<button id="buscarIssue">Buscar</button></p>';
+
+      document.getElementById("content").innerHTML = divContent;
+
+      var inputVal = document.getElementById("inputIssue").value;
+      document.getElementById("buscarIssue").addEventListener("click", listaUmaIssue);
+      
+      
+     }
+
+
+
+
+      </script>
+
+  </body>
+</html>
+
+
+
+
