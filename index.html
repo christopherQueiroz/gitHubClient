@@ -10,6 +10,28 @@
 
     *{
       font-family: Arial, sans-serif;
+
+    }
+
+    #cabecalho{
+      border: solid black 2px;
+      margin-bottom: 2%;
+    }
+
+    #cabecalho h2{
+      margin-left: 3%;
+    }
+
+    #mainMenu ul li{
+      display: inline;
+      list-style-type: none;
+      margin-right: 5%;
+      padding-bottom: 5%;
+    }
+
+    #rodape{
+      border: solid black;
+      top: 100%;
     }
 
 
@@ -35,27 +57,177 @@
 
     </style>
 
-   
+    <script src="jquery.js"></script>
   </head>
   <body>
-  <script src="jquery.js"></script>
+
+
+ 
+ <header id="cabecalho">
    <h2 class="text-center">Issues GitHub</h2>
+   <nav id="mainMenu">
+    <ul>
+      <li id="btnList">Listar issues</li>
+      <li id="btnCreate">Criar uma issue</li>
+      <li id="btnEdit">Editar uma issue</li>
+      <li id="btnSearch">Buscar uma issue</li>
+      <li id="btnLock">Lock</li>
+      <li id="btnUnlock">Unlock</li>
+    </ul>
+   </nav>
+ </header>
+
+
+
+
+
    <div id="content">
+    
+    <section id="createIssue">
+         
+         <div class="descIssue">
+             Notação: criação de issue
+             <p><input type="text" placeholder="título" class="ttleIssue"><button>Criar</button></p>
+             <p><textarea rows="4" cols="50" name="comment" class="msgIssue">Descrição: </textarea></p>
+
+        </div>
+
+    </section>
+
+
+   <section id="editIssue">
+
+         <div class="descIssue">
+            Notação: edição de issue
+            <p></p>
+             <p><input type="text" placeholder="título" class="ttleIssue"> <input type="text" placeholder="Número" class="numeroIssue" size="10px"> <button>Editar</button></p>
+             <p><textarea rows="4" cols="50" name="comment" class="msgIssue">Descrição: </textarea></p>
+
+        </div>
+
+    </section>
+
+
+
+   <section id="searchIssue">
+
+         <div class="descIssue">
+             Notação: busca de issue
+             <p><input type="text" placeholder="número da issue" class="numeroIssue"><button>Buscar</button></p>
+
+        </div>
+
+    </section>
+
+
+
+   <section id="lockIssue">
+
+         <div class="descIssue">
+             Notação: lock de issue
+             <p><input type="text" placeholder="título" class="numeroIssue"><button>Lock</button></p>
+
+        </div>
+
+    </section>
+
+    <section id="unLockIssue">
+
+         <div class="descIssue">
+             Notação: lock de issue
+             <p><input type="text" placeholder="número da issue" class="numeroIssue"><button>Unlock</button></p>
+
+        </div>
+
+    </section>
+
+    
+    
+
+     <section id="listIssues">
+
+        <div class="listIssue">
+          <table id="contentIssues"></table>
+
+        </div>
+
+      </section> 
+
 
    </div>
 
-   <button id="btnList">Lista Issues</button>
-   <button id="btnSearch">Buscar Issue</button>
-   <button id="btnCreate">Cria Issues</button>
+
+  <footer id="rodape">
+      <p>Consumo de API de Issues do GitHub</p>
+  </footer>
 
 
 
+  <script>
 
-      <script>
 
-      document.querySelector("#btnList").addEventListener("click", listaIssues);
-      document.querySelector("#btnSearch").addEventListener("click", abreInput);
-      document.querySelector("#btnCreate").addEventListener("click", createIssue);
+      $("#btnList").click(function(){
+        $("#createIssue").hide();
+        $("#editIssue").hide();
+        $("#lockIssue").hide();
+        $("#unLockIssue").hide();
+        $("#lockIssue").hide();
+        $("#searchIssue").hide();
+      });
+
+      $("#btnCreate").click(function(){
+        $("#createIssue").show();
+        $("#editIssue").hide();
+        $("#lockIssue").hide();
+        $("#unLockIssue").hide();
+        $("#lockIssue").hide();
+        $("#searchIssue").hide();
+      });
+
+      $("#btnEdit").click(function(){
+        $("#createIssue").hide();
+        $("#editIssue").show();
+        $("#lockIssue").hide();
+        $("#unLockIssue").hide();
+        $("#lockIssue").hide();
+        $("#searchIssue").hide();
+      });
+
+      $("#btnSearch").click(function(){
+        $("#createIssue").hide();
+        $("#editIssue").hide();
+        $("#lockIssue").hide();
+        $("#unLockIssue").hide();
+        $("#lockIssue").hide();
+        $("#searchIssue").show();
+      });
+
+     $("#btnLock").click(function(){
+        $("#createIssue").hide();
+        $("#editIssue").hide();
+        $("#lockIssue").show();
+        $("#unLockIssue").hide();
+        $("#searchIssue").hide();
+      });
+      
+      $("#btnUnlock").click(function(){
+        $("#createIssue").hide();
+        $("#editIssue").hide();
+        $("#lockIssue").hide();
+        $("#unLockIssue").show();
+        $("#lockIssue").hide();
+        $("#searchIssue").hide();
+      });
+
+
+
+      $("#lockIssue button").click(lockIssue);
+      $("#unLockIssue button").click(unLockIssue);
+      $("#editIssue button").click(editIssue);
+      $("#createIssue button").click(createIssue);
+      $("#searchIssue button").click(listaUmaIssue);
+      $("#btnList").click(listaIssues);
+
       
 
 
@@ -84,92 +256,130 @@
 
 
 
+
+        //Lista apenas uma issue
         function listaUmaIssue()
         {
-        debugger;
-        var ajax = new XMLHttpRequest();
-        var issueList = "";
-        var number = document.getElementById("inputIssue").value;
-
-        ajax.onreadystatechange = function() 
-        {
-          if (this.readyState == 4 && this.status == 200) 
+          var ajax = new XMLHttpRequest();
+          var issueList = "";
+          var number = $("#searchIssue .numeroIssue").val();
+          ajax.onreadystatechange = function() 
           {
-            issueList = JSON.parse(this.responseText);
-            populaDadosUmaIssue(issueList);
-        
+             if (this.readyState == 4 && this.status == 200) 
+             {
+                issueList = JSON.parse(this.responseText);
+                populaDadosUmaIssue(issueList);             
+              }
           }
+          
+           ajax.open("GET", "https://api.github.com/repos/christopherQueiroz/gitHubClient/issues/"+number, true);
+           ajax.send();
+         
         }
-        
-        ajax.open("GET", "https://api.github.com/repos/christopherQueiroz/gitHubClient/issues/"+number, true);
-        
-        ajax.send();
-      }
 
-
-
+        //Cria uma issue
         function createIssue(){
 
-        var tituloIssue = "Novo Teste";
-        var msgIssue = "Esse é mais um teste";  
+          var tituloIssue = $("#createIssue .ttleIssue").val();
+          var msgIssue = $("#createIssue .msgIssue").val(); 
+          var json = {
+                     "title" :  tituloIssue,
+                     "body" :  msgIssue
+                     };
 
-      /*  var ajax = new XMLHttpRequest();
-        var newIssue = {"title" : "'+ tituloIssue +'" , "body" : "'+ msgIssue +'"};
-*/
+          json = JSON.stringify (json);
 
- /*       $.post("https://api.github.com/repos/christopherQueiroz/estudo_api_maps/issues", {
-                "title" :  tituloIssue ,
-                "body" :  msgIssue,
-                "assignee" : "someone",
-                "assignees" : [{
-                                "login" : "thisUser",
-                                "id" : "1",
-                               }],
-                "milestone" : 1,
-                "state" : "open",
-                "labels" : ["teste"]
-               },
+         console.log(json);
 
-                function(data)
-                {
-                  alert("foi");
-                });*/
+
+          $.ajax({
+            type: "POST",
+            headers : {
+             "Authorization" : "token 6113ad9374903ae0984d683b9f7ee68815873d30"
+            },
+            data: json,
+            url : "https://api.github.com/repos/christopherQueiroz/gitHubClient/issues",
+            success: function(data) 
+            {
+              listaIssues();
+            }
+
+      });
+    }
+
+
+    //Edita uma issue
+    function editIssue(){
+        debugger;
+        var tituloIssue = $("#editIssue .ttleIssue").val();
+        var msgIssue = $("#editIssue .msgIssue").val(); 
+        var number = $("#editIssue .numeroIssue").val();
+
+        var json = {
+                   "title" :  tituloIssue,
+                   "body" :  msgIssue,
+                   "state" : "open"
+                   };
+
+        json = JSON.stringify (json);
+
+       console.log(json);
 
 
       $.ajax({
-        type: "POST",
-        data: {
-               "title" :  tituloIssue ,
-                "body" :  msgIssue,
-                //"assignees" : [],
-                "milestone" : 1,
-                //"labels" : []
-              },
-        url : "https://api.github.com/repos/christopherQueiroz/gitHubClient/issues",
-        success: function(data)
+        type: "PATCH",
+        headers : {
+         "Authorization" : "token 6113ad9374903ae0984d683b9f7ee68815873d30"
+        },
+        data: json,
+        url : "https://api.github.com/repos/christopherQueiroz/gitHubClient/issues/"+number,
+        success: function(data) 
         {
           listaIssues();
         }
 
       });
+    }
 
-      /*  ajax.onreadystatechange = function() 
-        {
-          if (this.readyState == 4 && this.status == 200) 
+
+
+    //Lock uma issue
+    function lockIssue(){
+
+        var number = $("#lockIssue .numeroIssue").val();
+        $.ajax({
+          type: "PUT",
+          headers : {
+           "Authorization" : "token 6113ad9374903ae0984d683b9f7ee68815873d30"
+          },
+          url : "https://api.github.com/repos/christopherQueiroz/gitHubClient/issues/"+number+"/lock",
+          success: function(data) 
           {
-            issueList = JSON.parse(this.responseText);
-            populaDadosIssues(issueList);
-        
+            listaIssues();
           }
-        }
-        
-        ajax.open("POST", "https://api.github.com/repos/christopherQueiroz/estudo_api_maps/issues", true);
-        
-        ajax.send(newIssue);*/
-      }
+
+      });
+    }
 
 
 
+    //UnLock uma issue
+    function unLockIssue(){
+
+        var number = $("#unLockIssue .numeroIssue").val();
+        $.ajax({
+          type: "DELETE",
+          headers : {
+           "Authorization" : "token 6113ad9374903ae0984d683b9f7ee68815873d30"
+          },
+          url : "https://api.github.com/repos/christopherQueiroz/gitHubClient/issues/"+number+"/lock",
+          success: function(data) 
+          {
+            listaIssues();
+          }
+
+      });
+    }
 
      
       //Popula os dados listados no grid
@@ -184,40 +394,24 @@
             divContent += '<tr><td>'+issues[cont].number+'</td><td>'+issues[cont].id+'</td><td>'+issues[cont].title+'</td><td>'+issues[cont].body+'</td></tr>'
           }
 
-         divContent += '</table>'
+         divContent += '</table>';
 
-         document.getElementById("content").innerHTML = divContent;
+         document.getElementById("contentIssues").innerHTML = divContent;
 
       }
 
       
+
+      //Popula o grid com apenas uma issue
       function populaDadosUmaIssue(issues)
       {
-          var divContent = '<table>';
-
-          divContent += '<tr><th>Número</th><th>Id</th><th>Título</th><th>Mensagem</th></tr>';  
-          divContent += '<tr><td>'+issues.number+'</td><td>'+issues.id+'</td><td>'+issues.title+'</td><td>'+issues.body+'</td></tr>'
-          divContent += '</table>'
-
-         document.getElementById("content").innerHTML = divContent;
+          var divContent = '';
+          divContent += '<tr><th>Número</th><th>Id</th><th>Título</th><th>Mensagem</th></tr>';
+          divContent += '<tr><td>'+issues.number+'</td><td>'+issues.id+'</td><td>'+issues.title+'</td><td>'+issues.body+'</td></tr>';
+          divContent += '</table>';
+         document.getElementById("contentIssues").innerHTML = divContent;
 
       }
-
-
-     function abreInput()
-     {
-
-      var divContent = '<p>Digite o numero da issue: <input type = "text" id="inputIssue">';
-      divContent += '<button id="buscarIssue">Buscar</button></p>';
-
-      document.getElementById("content").innerHTML = divContent;
-
-      var inputVal = document.getElementById("inputIssue").value;
-      document.getElementById("buscarIssue").addEventListener("click", listaUmaIssue);
-      
-      
-     }
-
 
 
 
