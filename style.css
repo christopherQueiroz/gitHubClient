@@ -1,0 +1,57 @@
+
+    body{
+      font-family: Arial, sans-serif; 
+      margin:0;
+       padding:0;
+
+    }
+
+    #cabecalho{
+      border: solid black 2px;
+      margin-bottom: 2%;
+    }
+
+    #cabecalho h2{
+      margin-left: 3%;
+    }
+
+    #mainMenu ul li{
+      display: inline;
+      list-style-type: none;
+      margin-right: 5%;
+      padding-bottom: 5%;
+    }
+
+    #rodape{
+      border: solid black;
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+    }
+
+    #content{
+      margin-left: 5%;
+    }
+
+
+
+      table, td, th {
+        border: 1px solid black;
+        text-align: center;
+        font-size: 0.9em;
+    }
+
+    table {
+        border-radius: 5%;
+        border-collapse: collapse;
+        width: 50%;
+        margin-bottom: 2%;
+    }
+
+    th {
+        height: 30px;
+    }
+
+    td{
+      height: 25px;
+    }
