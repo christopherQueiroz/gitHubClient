@@ -79,7 +79,7 @@
 
     //Edita uma issue
     function editIssue(){
-        debugger;
+  
         var tituloIssue = $("#editIssue .ttleIssue").val();
         var msgIssue = $("#editIssue .msgIssue").val(); 
         var number = $("#editIssue .numeroIssue").val();
@@ -160,11 +160,12 @@
       {
           var divContent = '<table>';
 
-          divContent += '<tr><th>Número</th><th>Id</th><th>Título</th><th>Mensagem</th></tr>';
+          divContent += '<tr><th>Número</th><th>Id</th><th>Título</th><th>Mensagem</th><th>Locked</th></tr>';
 
           for(var cont = 0; cont < issues.length; cont++)
           {
-            divContent += '<tr><td>'+issues[cont].number+'</td><td>'+issues[cont].id+'</td><td>'+issues[cont].title+'</td><td>'+issues[cont].body+'</td></tr>'
+            divContent += '<tr><td>'+issues[cont].number+'</td><td>'+issues[cont].id+'</td><td>'+issues[cont].title+'</td><td>'+issues[cont].body+'</td>';
+            divContent +='<td>'+issues[cont].locked+'</td></tr>'
           }
 
          divContent += '</table>';
@@ -180,8 +181,8 @@
       function populaDadosUmaIssue(issues)
       {
           var divContent = '';
-          divContent += '<tr><th>Número</th><th>Id</th><th>Título</th><th>Mensagem</th></tr>';
-          divContent += '<tr><td>'+issues.number+'</td><td>'+issues.id+'</td><td>'+issues.title+'</td><td>'+issues.body+'</td></tr>';
+          divContent += '<tr><th>Número</th><th>Id</th><th>Título</th><th>Mensagem</th><th>Locked</th></tr>';
+          divContent += '<tr><td>'+issues.number+'</td><td>'+issues.id+'</td><td>'+issues.title+'</td><td>'+issues.body+'</td><td>'+issues.locked+'</td></tr>';
           divContent += '</table>';
          document.getElementById("contentIssues").innerHTML = divContent;
          $("#listIssues").show();

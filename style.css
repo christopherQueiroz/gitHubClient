@@ -3,12 +3,10 @@
       max-width: 100%;
       margin:0;
       padding:0;
-      overflow-x: hidden;
-      overflow-y: auto;
-
     }
 
     #cabecalho{
+      max-width: 100%;
       border: solid #191970 2px;
       background-color: #191970;
       color: #ADD8E6;
@@ -104,8 +102,8 @@
       color: #ADD8E6;
       font-size: 0.8em;
       position: absolute;
-      width: 100%;
-      bottom: 0;
+      width: 99.5%;
+      bottom: 0%;
     }
 
     #rodape p{
@@ -115,7 +113,6 @@
     #content{
       margin-left: 5%;
       color: #191970;
-
     }
 
 
