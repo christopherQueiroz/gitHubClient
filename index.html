@@ -6,67 +6,8 @@
     <meta charset="utf-8">
     <title>Issues GitHub</title>
 
-    <style type="text/css">
-
-    body{
-      font-family: Arial, sans-serif; 
-      margin:0;
-       padding:0;
-
-    }
-
-    #cabecalho{
-      border: solid black 2px;
-      margin-bottom: 2%;
-    }
-
-    #cabecalho h2{
-      margin-left: 3%;
-    }
-
-    #mainMenu ul li{
-      display: inline;
-      list-style-type: none;
-      margin-right: 5%;
-      padding-bottom: 5%;
-    }
-
-    #rodape{
-      border: solid black;
-      position: absolute;
-      width: 100%;
-      bottom: 0;
-    }
-
-    #content{
-      margin-left: 5%;
-    }
-
-
-
-      table, td, th {
-        border: 1px solid black;
-        text-align: center;
-        font-size: 0.9em;
-    }
-
-    table {
-        border-radius: 5%;
-        border-collapse: collapse;
-        width: 50%;
-        margin-bottom: 2%;
-    }
-
-    th {
-        height: 30px;
-    }
-
-    td{
-      height: 25px;
-    }
-
-    </style>
-
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="jquery.js"></script>
   </head>
   <body>
@@ -85,6 +26,9 @@
       <li id="btnUnlock">Unlock</li>
     </ul>
    </nav>
+   <div id="logo">
+    <a href="http://github.com/christopherQueiroz" target="-blank"><img src="github-512.png"></a>
+   </div>
  </header>
 
 
@@ -93,12 +37,14 @@
 
    <div id="content">
     
+    <h3 id="innerTitle">Selecione a ação que quer executar com as suas Issues</h3>
+
     <section id="createIssue">
          
          <div class="descIssue">
-             <h3>Notação: criação de issue</h3>
+             
              <p><input type="text" placeholder="título" class="ttleIssue"><button>Criar</button></p>
-             <p><textarea rows="4" cols="50" name="comment" class="msgIssue">Descrição: </textarea></p>
+             <p><textarea rows="5" cols="50" name="comment" class="msgIssue">Descrição: </textarea></p>
 
         </div>
 
@@ -108,8 +54,6 @@
    <section id="editIssue">
 
          <div class="descIssue">
-            <h3>Notação: edição de issue</h3>
-            <p></p>
              <p><input type="text" placeholder="título" class="ttleIssue"> <input type="text" placeholder="Número" class="numeroIssue" size="10px"> <button>Editar</button></p>
              <p><textarea rows="4" cols="50" name="comment" class="msgIssue">Descrição: </textarea></p>
 
@@ -122,7 +66,6 @@
    <section id="searchIssue">
 
          <div class="descIssue">
-            <h3>Notação: busca de issue</h3>
              <p><input type="text" placeholder="número da issue" class="numeroIssue"><button>Buscar</button></p>
 
         </div>
@@ -134,8 +77,7 @@
    <section id="lockIssue">
 
          <div class="descIssue">
-            <h3>Notação: lock de issue</h3>
-             <p><input type="text" placeholder="título" class="numeroIssue"><button>Lock</button></p>
+             <p><input type="text" placeholder="número da issue" class="numeroIssue"><button>Lock</button></p>
 
         </div>
 
@@ -144,7 +86,6 @@
     <section id="unLockIssue">
 
          <div class="descIssue">
-             <h3>Notação: unlock de issue</h3>
              <p><input type="text" placeholder="número da issue" class="numeroIssue"><button>Unlock</button></p>
 
         </div>
@@ -168,7 +109,7 @@
 
 
   <footer id="rodape">
-      <p>Consumo de API de Issues do GitHub</p>
+      <p>Consumo de API de Issues do GitHub - Christopher Queiroz</p>
   </footer>
 
 

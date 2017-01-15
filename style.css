@@ -1,13 +1,17 @@
-
     body{
       font-family: Arial, sans-serif; 
+      max-width: 100%;
       margin:0;
-       padding:0;
+      padding:0;
+      overflow-x: hidden;
+      overflow-y: auto;
 
     }
 
     #cabecalho{
-      border: solid black 2px;
+      border: solid #191970 2px;
+      background-color: #191970;
+      color: #ADD8E6;
       margin-bottom: 2%;
     }
 
@@ -15,28 +19,109 @@
       margin-left: 3%;
     }
 
-    #mainMenu ul li{
-      display: inline;
-      list-style-type: none;
-      margin-right: 5%;
-      padding-bottom: 5%;
+    #mainMenu ul{
+      margin-left: -3%;
     }
 
+    input[type="text"], textarea{
+      font-family: arial, sans-serif;
+      font-size: 0.9em;
+      color: #191970;
+      outline: none;
+      box-shadow: none;
+      border-color: lightblue;
+    }
+
+    input[type="text"]{
+      border: solid lightblue 1px;
+      height: 25px;
+    }
+
+    button{
+      border: none;
+      border-radius: 25%;
+      background-color: #191970;
+      color: #ADD8E6;
+      padding: 0.4%;
+      margin-left: 0.4%;
+      margin-right: 0.4%;
+      outline: none;
+     -webkit-transition: background-color 0.2s ease-in;
+      transition: background-color 0.2s ease-in;
+    }
+
+    button:hover{
+      background-color: #0000CD;
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 500px){
+       
+       #mainMenu ul{
+        min-width: 100%;
+       }
+
+      #mainMenu ul li{
+        position: relative;
+        background-color: #191970;
+        float: left;
+        display: block;
+        left: -6%;
+      }
+
+      table{
+        border-radius: 5%;
+        border-collapse: collapse;
+        min-width: 90%;
+        max-height: 100%;
+        margin-bottom: 2%;
+  
+      }
+    }
+
+    #mainMenu ul li{
+     
+      width: 100%;
+      max-height: 100%;
+      display: inline;
+      list-style-type: none;
+      margin-right: -0.5%;
+      margin-left: 0%;
+      padding: 1.3% 3%;
+      -webkit-transition: background-color 0.2s ease-in;
+      transition: background-color 0.2s ease-in;
+    }
+   
+    #mainMenu li:hover{
+      background-color: #0000CD;
+      cursor: pointer;
+    }
+
+
     #rodape{
-      border: solid black;
+      border: solid #191970 2px;
+      background-color: #191970;
+      color: #ADD8E6;
+      font-size: 0.8em;
       position: absolute;
       width: 100%;
       bottom: 0;
     }
 
+    #rodape p{
+      margin-left: 5%;
+    }
+
     #content{
       margin-left: 5%;
+      color: #191970;
+
     }
 
 
 
       table, td, th {
-        border: 1px solid black;
+        border: none;
         text-align: center;
         font-size: 0.9em;
     }
@@ -50,8 +135,37 @@
 
     th {
         height: 30px;
+        background-color: #191970;
+        color: #ADD8E6;
     }
 
     td{
       height: 25px;
+      color: #191970;
+    }
+
+    #contentIssues tr:nth-child(even){
+      background-color: #E0FFFF;
+    }
+
+      #contentIssues tr:nth-child(odd){
+      background-color: #F0FFFF;
+    }
+
+    #contentIssues h3{
+      margin-top: 1%;
+    }
+
+    #logo a{
+      outline: none;
+    }
+
+    #logo img{
+      position: absolute;
+      display: inline;
+      top: 4%;
+      float: right;
+      left: 90%;
+      width: 65px;
+      height: 65px;
     }

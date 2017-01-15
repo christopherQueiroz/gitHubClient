@@ -16,50 +16,57 @@
         $("#unLockIssue").hide();
         $("#lockIssue").hide();
         $("#searchIssue").hide();
+        $("#innerTitle").text("Lista de issues");
       });
 
       $("#btnCreate").click(function(){
+        $("#listIssues").hide();
         $("#createIssue").show();
         $("#editIssue").hide();
         $("#lockIssue").hide();
         $("#unLockIssue").hide();
-        $("#lockIssue").hide();
         $("#searchIssue").hide();
+        $("#innerTitle").text("Criar uma issue");
       });
 
       $("#btnEdit").click(function(){
+        $("#listIssues").hide();
         $("#createIssue").hide();
         $("#editIssue").show();
         $("#lockIssue").hide();
         $("#unLockIssue").hide();
-        $("#lockIssue").hide();
         $("#searchIssue").hide();
+        $("#innerTitle").text("Editar uma issue");
       });
 
       $("#btnSearch").click(function(){
+        $("#listIssues").hide();
         $("#createIssue").hide();
         $("#editIssue").hide();
         $("#lockIssue").hide();
         $("#unLockIssue").hide();
-        $("#lockIssue").hide();
         $("#searchIssue").show();
+        $("#innerTitle").text("Buscar uma issue");
       });
 
      $("#btnLock").click(function(){
+        $("#listIssues").hide();
         $("#createIssue").hide();
         $("#editIssue").hide();
         $("#lockIssue").show();
         $("#unLockIssue").hide();
         $("#searchIssue").hide();
+        $("#innerTitle").text("Lock uma issue");
       });
       
       $("#btnUnlock").click(function(){
+        $("#listIssues").hide();
         $("#createIssue").hide();
         $("#editIssue").hide();
         $("#lockIssue").hide();
         $("#unLockIssue").show();
-        $("#lockIssue").hide();
         $("#searchIssue").hide();
+        $("#innerTitle").text("Unlock uma issue");
       });
 
 

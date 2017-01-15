@@ -36,7 +36,7 @@
              if (this.readyState == 4 && this.status == 200) 
              {
                 issueList = JSON.parse(this.responseText);
-                populaDadosUmaIssue(issueList);             
+                populaDadosUmaIssue(issueList);           
               }
           }
           
@@ -155,9 +155,7 @@
 
 
 
-
-
-          //Popula os dados listados no grid
+      //Popula os dados listados no grid
       function populaDadosIssues(issues)
       {
           var divContent = '<table>';
@@ -172,6 +170,7 @@
          divContent += '</table>';
 
          document.getElementById("contentIssues").innerHTML = divContent;
+         $("#listIssues").show();
 
       }
 
@@ -185,5 +184,6 @@
           divContent += '<tr><td>'+issues.number+'</td><td>'+issues.id+'</td><td>'+issues.title+'</td><td>'+issues.body+'</td></tr>';
           divContent += '</table>';
          document.getElementById("contentIssues").innerHTML = divContent;
+         $("#listIssues").show();
 
       }
