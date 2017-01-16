@@ -1,4 +1,5 @@
       $(document).ready(function(){
+        $("#home").show();
         $("#listIssues").hide();
         $("#createIssue").hide();
         $("#editIssue").hide();
@@ -6,7 +7,19 @@
         $("#unLockIssue").hide();
         $("#lockIssue").hide();
         $("#searchIssue").hide();
-      })
+      });
+
+      $("#btnHome").click(function(){
+        $("#home").show();
+        $("#listIssues").hide();
+        $("#createIssue").hide();
+        $("#editIssue").hide();
+        $("#lockIssue").hide();
+        $("#unLockIssue").hide();
+        $("#lockIssue").hide();
+        $("#searchIssue").hide();
+        $("#innerTitle").text("Selecione a ação que deseja executar com as issues");
+      });
 
       $("#btnList").click(function(){
         $("#listIssues").show();
@@ -16,6 +29,7 @@
         $("#unLockIssue").hide();
         $("#lockIssue").hide();
         $("#searchIssue").hide();
+        $("#home").hide();
         $("#innerTitle").text("Lista de issues");
       });
 
@@ -26,6 +40,7 @@
         $("#lockIssue").hide();
         $("#unLockIssue").hide();
         $("#searchIssue").hide();
+        $("#home").hide();
         $("#innerTitle").text("Criar uma issue");
       });
 
@@ -36,6 +51,7 @@
         $("#lockIssue").hide();
         $("#unLockIssue").hide();
         $("#searchIssue").hide();
+        $("#home").hide();
         $("#innerTitle").text("Editar uma issue");
       });
 
@@ -46,6 +62,7 @@
         $("#lockIssue").hide();
         $("#unLockIssue").hide();
         $("#searchIssue").show();
+        $("#home").hide();
         $("#innerTitle").text("Buscar uma issue");
       });
 
@@ -56,6 +73,7 @@
         $("#lockIssue").show();
         $("#unLockIssue").hide();
         $("#searchIssue").hide();
+        $("#home").hide();
         $("#innerTitle").text("Lock uma issue");
       });
       
@@ -66,6 +84,7 @@
         $("#lockIssue").hide();
         $("#unLockIssue").show();
         $("#searchIssue").hide();
+        $("#home").hide();
         $("#innerTitle").text("Unlock uma issue");
       });
 

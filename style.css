@@ -37,7 +37,7 @@
 
     button{
       border: none;
-      border-radius: 25%;
+      border-radius: 15%;
       background-color: #191970;
       color: #ADD8E6;
       padding: 0.4%;
@@ -165,4 +165,11 @@
       left: 90%;
       width: 65px;
       height: 65px;
+    }
+
+    #home img{
+
+      margin: 0 auto;
+      width: 30%;
+      height: 30%;
     }
